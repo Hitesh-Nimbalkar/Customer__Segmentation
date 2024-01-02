@@ -1,0 +1,19 @@
+pandas
+scikit-learn
+numpy
+seaborn
+matplotlib
+PyYAML
+certifi
+dill
+joblib
+matplotlib
+seaborn
+numpy
+pandas
+pyaml
+requests
+scikit-learn
+scipy
+statsmodels
+-e .

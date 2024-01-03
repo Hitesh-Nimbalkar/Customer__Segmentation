@@ -16,4 +16,6 @@ requests
 scikit-learn
 scipy
 statsmodels
+pymongo
+python-dotenv
 -e .

@@ -15,16 +15,16 @@ def get_requirements() -> List[str]:
 
 setup(
     name="Customer Segmentation",
-    version="0.0.1",
+    version="0.0.5",
     author="Hitesh Nimbalkar",
     author_email="nimbalkarhitesh@gmail.com",
-    description="ML Clustering ",
-    packages=find_packages(),
+    description="ML Clustering",
+    packages=find_packages(where='src'),  
+    package_dir={'': 'src'}, 
     install_requires=get_requirements(),
     classifiers=[
         "License :: OSI Approved :: MIT License",
         "Programming Language :: Python :: 3.11"
     ],
     keywords="Unsupervised,Clustering",
-
 )

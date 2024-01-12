@@ -64,4 +64,25 @@ class DataTransformationConfig:
         self.preprocessed_dir = os.path.join(self.data_transformation_dir,data_transformation_key[DATA_TRANSFORMATION_PREPROCESSING_DIR_KEY])
         self.feature_engineering_object_file_path =os.path.join(self.preprocessed_dir,data_transformation_key[DATA_TRANSFORMATION_FEA_ENG_FILE_NAME_KEY])
         self.preprocessor_file_object_file_path=os.path.join(self.preprocessed_dir,data_transformation_key[DATA_TRANSFORMATION_PREPROCESSOR_NAME_KEY])
-        
+
+
+class ModelTrainerConfig:
+    def __init__(self,training_pipeline_config:TrainingPipelineConfig):
+        try:
+
+            self.model_trainer_config = config_data[MODEL_TRAINING_CONFIG_KEY]
+         
+            self.trained_model_directory=os.path.join(training_pipeline_config.artifact_dir,
+                                                    self.model_trainer_config[MODEL_TRAINER_ARTIFACT_DIR])
+
+            self.trained_model_file_path = os.path.join(self.trained_model_directory,
+                                                    self.model_trainer_config[MODEL_TRAINER_OBJECT])
+            
+            
+            self.png_location=os.path.join(self.trained_model_directory,'model_predictions')
+            self.model_report_path=os.path.join(self.trained_model_directory,
+                                        self.model_trainer_config[MODEL_REPORT_FILE])
+
+
+        except Exception as e:
+            raise ApplicationException(e,sys) from e

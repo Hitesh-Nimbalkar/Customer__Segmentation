@@ -6,6 +6,8 @@ from segmentation.entity.artifact_entity import *
 from segmentation.components.data_ingestion import DataIngestion
 from segmentation.components.data_validation import DataValidation
 from segmentation.components.data_transformation import DataTransformation
+from segmentation.components.model_training import ModelTrainer
+
 
 
 class Pipeline():
@@ -43,6 +45,19 @@ class Pipeline():
         except Exception as e:
             raise ApplicationException(e,sys) from e
         
+        
+    def start_model_training(self,data_transformation_artifact: DataTransformationArtifact) -> ModelTrainerArtifact:
+        try:
+            model_trainer = ModelTrainer(model_trainer_config=ModelTrainerConfig(self.training_pipeline_config),
+                                        data_transformation_artifact=data_transformation_artifact)   
+            
+            logging.info("Model Trainer intiated")
+
+            return model_trainer.initiate_model_training()
+        except Exception as e:
+            raise ApplicationException(e,sys) from e  
+        
+        
     def run_pipeline(self):
             try:
                 #data ingestion
@@ -51,7 +66,9 @@ class Pipeline():
                 data_validation_artifact=self.start_data_validation(data_ingestion_artifact=data_ingestion_artifact)
                  # data transformation 
                 data_transformation_artifact = self.start_data_transformation(data_validation_artifact=data_validation_artifact)
-                
+                # Model Trainer 
+                model_trainer_artifact = self.start_model_training(data_transformation_artifact=data_transformation_artifact)
+                               
 
                 
             except Exception as e:

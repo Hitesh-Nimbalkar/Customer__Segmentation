@@ -93,7 +93,7 @@ MODEL_EVAL_CONFIG_KEY='model_eval_config'
 MODEL_EVALUATION_DIRECTORY='model_eval_dir'
 MODEL_EVALUATION_OBJECT='model_object'
 MODEL_REPORT='model_report'
-MODEL_METRIC='model_metric'
+MODEL_LABEL='model_name'
 
 
 
@@ -108,7 +108,22 @@ from segmentation.utils.main_utils import read_yaml_file
 config_data=read_yaml_file(CONFIG_FILE_PATH)
 EXPERIMENT=config_data[MODEL_TRAINING_CONFIG_KEY][MODEL_TRAINING_MLFLOW][MLFLOW_EXPERIMENT]
 RUN_NAME=config_data[MODEL_TRAINING_CONFIG_KEY][MODEL_TRAINING_MLFLOW][MLFLOW_RUN_NAME]
-METRIC=config_data[MODEL_TRAINING_CONFIG_KEY][MODEL_METRIC]
+
+
+# Model Training Parameters 
+MODEL_TRAINING_YAML = os.path.join(os.getcwd(),'config','model_training.yaml')
+training_config_data=read_yaml_file(MODEL_TRAINING_YAML)
+MODEL_NAME=training_config_data['model']['Model_name']
+METRIC=training_config_data['model']['model_metric']
+parameters=training_config_data['model']['parameters']
+CLUSTERS=parameters['no_of_clusters']
+COVARIANCE=parameters['covariance_type']
+INIT_PARAMS=parameters['init_params']
+ITERATIONS=int(parameters['max_iter'])
+TOLERANCE=float(parameters['tol'])
+
+
+
 
 
 

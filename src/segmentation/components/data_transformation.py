@@ -447,7 +447,8 @@ class DataTransformation:
             logging.info(f"Applying feature engineering object on training dataframe and testing dataframe")
             logging.info(">>>" * 20 + " Training data " + "<<<" * 20)
             logging.info(f"Feature Enineering - Train Data ")
-            train_df = fe_obj.fit_transform(train_df)
+            train_df:pd.DataFrame = fe_obj.fit_transform(train_df)
+            train_df.dropna(inplace=True)
 
             #logging.info(f" Columns in feature enginering {feature_eng_test_df.columns}")
             logging.info(f"Saving feature engineered training  dataframe.")
@@ -524,7 +525,7 @@ class DataTransformation:
             save_object(file_path=os.path.join(ROOT_DIR,config_data[DATA_TRANSFORMATION_CONFIG_KEY][DATA_TRANSFORMATION_PREPROCESSING_DIR_KEY],
                                  os.path.basename(preprocessor_file_path)),obj=preprocessor)
 
-            data_transformation_artifact = DataTransformationArtifact(
+            data_transformation_artifact = DataTransformationArtifact(  feature_eng_df=Feature_eng_train_file_path,
                                                                         transformed_train_file_path =transformed_train_file_path,
                                                                         feature_engineering_object_file_path = feature_engineering_object_file_path)
             

@@ -34,7 +34,6 @@ model_trainer_config:
   model_training: model_training 
   model_object: model.pkl
   model_report: report.yaml
-  model_metric: silhouette score
   mlflow:
     Run_name: Trial
     Experiment: Experiment_01

@@ -79,7 +79,7 @@ class ModelTrainerConfig:
                                                     self.model_trainer_config[MODEL_TRAINER_OBJECT])
             
             
-            self.png_location=os.path.join(self.trained_model_directory,'model_predictions')
+            self.png_location=os.path.join(self.trained_model_directory)
             self.model_report_path=os.path.join(self.trained_model_directory,
                                         self.model_trainer_config[MODEL_REPORT_FILE])
 

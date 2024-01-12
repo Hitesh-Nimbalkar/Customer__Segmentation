@@ -4,7 +4,7 @@ from segmentation.exception.exception import ApplicationException
 from segmentation.entity.config_entity import *
 from segmentation.entity.artifact_entity import *
 from segmentation.components.data_ingestion import DataIngestion
-
+from segmentation.components.data_validation import DataValidation
 
 
 
@@ -25,12 +25,21 @@ class Pipeline():
         except Exception as e:
             raise ApplicationException(e, sys) from e
         
-        
+    def start_data_validation(self, data_ingestion_artifact:DataIngestionArtifact)-> DataValidationArtifact:
+        try:
+            data_validation = DataValidation(data_validation_config=DataValidationConfig(self.training_pipeline_config),
+                                             data_ingestion_artifact=data_ingestion_artifact)
+            return data_validation.initiate_data_validation()
+        except Exception as e:
+            raise ApplicationException(e, sys) from e
         
     def run_pipeline(self):
             try:
                 #data ingestion
                 data_ingestion_artifact = self.start_data_ingestion()
+                # data Validation 
+                data_validation_artifact=self.start_data_validation(data_ingestion_artifact=data_ingestion_artifact)
+                
                 
 
                 

@@ -93,7 +93,11 @@ class DataIngestion:
         
         
         # Load data from the CSV file
-        data = pd.read_csv(csv_file_path,index_col=False)
+        data = pd.read_csv(csv_file_path)
+
+        
+
+        
         # Drop unnamed column if it exists
         if 'Unnamed: 0' in data.columns:
             data.drop(columns=['Unnamed: 0'], inplace=True)

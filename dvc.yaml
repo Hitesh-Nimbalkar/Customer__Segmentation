@@ -1,0 +1,22 @@
+stages:
+  data_ingestion_stage:
+    cmd: python src/segmentation/pipeline/dvc_pipeline/data_ingestion.py
+    deps:
+      - src/segmentation/entity/config_entity.py
+      - src/segmentation/entity/artifact_entity.py
+      - src/segmentation/components/data_ingestion.py
+      - config/
+      - src/segmentation/pipeline/dvc_pipeline/data_ingestion.py
+    outs:
+      - artifact/data_ingestion/
+
+  data_validation_stage:
+    cmd: python src/segmentation/pipeline/dvc_pipeline/data_validation.py
+    deps:
+      - src/segmentation/entity/config_entity.py
+      - src/segmentation/components/data_validation.py
+      - config/
+      - src/segmentation/pipeline/dvc_pipeline/data_validation.py
+      - artifact/data_ingestion/
+    outs:
+      - artifact/data_validation/

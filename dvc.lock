@@ -1,0 +1,32 @@
+schema: '2.0'
+stages:
+  data_ingestion_stage:
+    cmd: python src/segmentation/pipeline/dvc_pipeline/data_ingestion.py
+    deps:
+    - path: config/
+      hash: md5
+      md5: 56279bb78da2ef637439d9776538f62b.dir
+      size: 2380
+      nfiles: 2
+    - path: src/segmentation/components/data_ingestion.py
+      hash: md5
+      md5: 276d309ba6b7824aac2a6f113678c42b
+      size: 6434
+    - path: src/segmentation/entity/artifact_entity.py
+      hash: md5
+      md5: bfa611d78f2c60757c2100321453dd73
+      size: 243
+    - path: src/segmentation/entity/config_entity.py
+      hash: md5
+      md5: 3d3457a2850423b6208bf56a921de72d
+      size: 2717
+    - path: src/segmentation/pipeline/dvc_pipeline/data_ingestion.py
+      hash: md5
+      md5: 6196077ea32dbeb17694c9da6932b004
+      size: 1327
+    outs:
+    - path: artifact/data_ingestion/
+      hash: md5
+      md5: cbfd17646af811ad6d21e7f83df9f6a3.dir
+      size: 469422
+      nfiles: 2

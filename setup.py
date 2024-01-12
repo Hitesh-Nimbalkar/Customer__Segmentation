@@ -15,7 +15,7 @@ def get_requirements() -> List[str]:
 
 setup(
     name="Customer Segmentation",
-    version="0.0.5",
+    version="0.2.4",
     author="Hitesh Nimbalkar",
     author_email="nimbalkarhitesh@gmail.com",
     description="ML Clustering",

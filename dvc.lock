@@ -5,21 +5,21 @@ stages:
     deps:
     - path: config/
       hash: md5
-      md5: 56279bb78da2ef637439d9776538f62b.dir
-      size: 2380
+      md5: b6dec09d49d638c9573d06cf492bb1a7.dir
+      size: 2257
       nfiles: 2
     - path: src/segmentation/components/data_ingestion.py
       hash: md5
-      md5: 276d309ba6b7824aac2a6f113678c42b
-      size: 6434
+      md5: 8c0d8b4783f9a4dd05b6e1adf1bb0c92
+      size: 5705
     - path: src/segmentation/entity/artifact_entity.py
       hash: md5
-      md5: bfa611d78f2c60757c2100321453dd73
-      size: 243
+      md5: 3107eb2c54fef014d7cea1cb66fa8c66
+      size: 426
     - path: src/segmentation/entity/config_entity.py
       hash: md5
-      md5: 3d3457a2850423b6208bf56a921de72d
-      size: 2717
+      md5: 9ee69ddbf707135cc49f7dfa35af20b6
+      size: 3505
     - path: src/segmentation/pipeline/dvc_pipeline/data_ingestion.py
       hash: md5
       md5: 6196077ea32dbeb17694c9da6932b004
@@ -27,6 +27,37 @@ stages:
     outs:
     - path: artifact/data_ingestion/
       hash: md5
-      md5: cbfd17646af811ad6d21e7f83df9f6a3.dir
-      size: 469422
+      md5: 504339901dbfa354cda57cb468a72ed3.dir
+      size: 694042
+      nfiles: 3
+  data_validation_stage:
+    cmd: python src/segmentation/pipeline/dvc_pipeline/data_validation.py
+    deps:
+    - path: artifact/data_ingestion/
+      hash: md5
+      md5: 504339901dbfa354cda57cb468a72ed3.dir
+      size: 694042
+      nfiles: 3
+    - path: config/
+      hash: md5
+      md5: b6dec09d49d638c9573d06cf492bb1a7.dir
+      size: 2257
       nfiles: 2
+    - path: src/segmentation/components/data_validation.py
+      hash: md5
+      md5: d11fb94c377aa031b2b79b88342c6fd2
+      size: 6235
+    - path: src/segmentation/entity/config_entity.py
+      hash: md5
+      md5: 9ee69ddbf707135cc49f7dfa35af20b6
+      size: 3505
+    - path: src/segmentation/pipeline/dvc_pipeline/data_validation.py
+      hash: md5
+      md5: dfe66f83c83ceadd865601781397e8a5
+      size: 1553
+    outs:
+    - path: artifact/data_validation/
+      hash: md5
+      md5: e4dd64dfd3f597271896e8e2f0befcd0.dir
+      size: 224620
+      nfiles: 1

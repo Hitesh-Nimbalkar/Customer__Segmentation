@@ -82,53 +82,35 @@ class DataIngestion:
         
         
         
-    def split_csv_to_train_test(self,csv_file_path):
+    def train_data(self,csv_file_path):
         
                     
         train_file_path=self.data_ingestion_config.train_file_path
-        test_file_path=self.data_ingestion_config.test_file_path
         
         os.makedirs(train_file_path,exist_ok=True)
-        os.makedirs(test_file_path,exist_ok=True)
-        
         
         # Load data from the CSV file
-        data = pd.read_csv(csv_file_path)
-
-        
-
+        train_data = pd.read_csv(csv_file_path)
         
         # Drop unnamed column if it exists
-        if 'Unnamed: 0' in data.columns:
-            data.drop(columns=['Unnamed: 0'], inplace=True)
-
-        size=self.data_ingestion_config.split_size
-
-        # Split the data into training and testing sets
-        train_data, test_data = train_test_split(data, test_size=size, random_state=42)
+        if 'Unnamed: 0' in train_data.columns:
+            train_data.drop(columns=['Unnamed: 0'], inplace=True)
 
         # Save the training and testing data into separate CSV files
-        
         train_file_path=os.path.join(train_file_path,self.file_name)
-        test_file_path=os.path.join(test_file_path,self.file_name)
+
         
         logging.info(f" Train File path : {train_file_path}")
-        logging.info(f" Train File path : {test_file_path}")
         
         train_data.to_csv(train_file_path, index=False)
-        test_data.to_csv(test_file_path, index=False)
         
         logging.info("---Data Split Done ---")
         logging.info(f"Shape of the data Train Data : {train_data.shape}")
-        logging.info(f"Shape of the data Test Data : {test_data.shape}")
         
         logging.info(f" Train File path : {train_file_path}")
-        logging.info(f" Test File path : {test_file_path}")
         
         
-        
-        
-        data_ingestion_artifact=DataIngestionArtifact(train_file_path=train_file_path,test_file_path=test_file_path)
+        data_ingestion_artifact=DataIngestionArtifact(train_file_path=train_file_path)
         
         return data_ingestion_artifact
 
@@ -162,7 +144,7 @@ class DataIngestion:
             
             logging.info("Splitting data .... ")
             
-            return  self.split_csv_to_train_test(csv_file_path=ingest_file_path)
+            return  self.train_data(csv_file_path=ingest_file_path)
 
 
         except Exception as e:

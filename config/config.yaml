@@ -10,17 +10,15 @@ data_ingestion_config:
   collection_name: Data
   artifact_dir: data_ingestion
   raw_data_dir: raw_data
-  train_test_split : 0.2
   ingested_dir: ingested_Data
   ingested_train_dir: Train
-  ingested_test_dir: Test
+
 
 
 data_validation_config:
   data_validation_dir: data_validation
   validated_data: validated_data
   Train_data: Train
-  Test_data: Test
 
 
 
@@ -28,7 +26,6 @@ data_transformation_config:
   data_transformation_dir: data_transformation
   transformed_dir: transformed_data
   transformed_train_dir: train
-  transformed_test_dir: test
   preprocessing_dir: preprocessor
   preprocessed_object_file_name: preprocessed.pkl
   feature_eng_file: fea_eng.pkl

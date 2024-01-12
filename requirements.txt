@@ -18,5 +18,6 @@ scipy
 statsmodels
 pymongo
 python-dotenv
+scipy
 dvc
 -e .

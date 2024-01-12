@@ -1,0 +1,26 @@
+
+drop_columns:
+ - Dt_Customer
+ - Year_Birth
+ - ID
+ - Kidhome
+ - Teenhome
+ - AcceptedCmp1
+ - AcceptedCmp2
+ - AcceptedCmp3
+ - AcceptedCmp4
+ - AcceptedCmp5
+ - Response
+ - Z_CostContact
+ - Z_Revenue
+# - NumWebPurchases
+# - NumCatalogPurchases
+# - NumStorePurchases
+# - NumWebVisitsMonth
+
+
+categorical_columns:
+ - Education
+ - Living_With
+
+

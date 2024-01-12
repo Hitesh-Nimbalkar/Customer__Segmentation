@@ -1,0 +1,46 @@
+categorical_columns:
+  Education:
+  - Graduate
+  - Postgraduate
+  - Undergraduate
+  Family_Size:
+  - 1
+  - 3
+  - 2
+  - 4
+  - 5
+  Living_With:
+  - Alone
+  - Partner
+  - Divorced
+  - Widow
+  Marital_Status:
+  - Single
+  - Together
+  - Married
+  - Divorced
+  - Widow
+  - Alone
+  - Absurd
+  - YOLO
+numerical_columns:
+- Income
+- Recency
+- Wines
+- Fruits
+- Meat
+- Fish
+- Sweet
+- Gold
+- DealsPurchases
+- Web
+- Catalog
+- Store
+- WebVisitsMonth
+- Complain
+- Total_Offsprings
+- Age
+- Total_Amount
+- Frequency
+- Total_purchases
+- online_purchase_ratio

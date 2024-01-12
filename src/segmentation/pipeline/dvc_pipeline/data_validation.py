@@ -18,13 +18,12 @@ class data_validation():
             artifact=read_yaml_file(ARTIFACT_ENTITY_YAML_FILE_PATH)
             data_ingestion_artifact=artifact['data_ingestion']
             train_path=data_ingestion_artifact['train_file_path']
-            test_path=data_ingestion_artifact['test_file_path']
             
             
             data_validation = DataValidation(
                 data_validation_config = DataValidationConfig(self.training_pipeline_config),
-                data_ingestion_artifact = DataIngestionArtifact(train_file_path=train_path,
-                                                                  test_file_path=test_path))
+                data_ingestion_artifact = DataIngestionArtifact(train_file_path=train_path
+                                                                  ))
 
             data_validation_artifact=data_validation.initiate_data_validation()
             

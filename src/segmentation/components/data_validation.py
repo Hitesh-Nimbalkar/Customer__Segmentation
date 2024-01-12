@@ -23,23 +23,22 @@ class DataValidation:
             self.schema_path = self.data_validation_config.schema_file_path
             
             self.train_path = self.data_ingestion_artifact.train_file_path
-            self.test_path = self.data_ingestion_artifact.test_file_path
+
             
             logging.info(f" Train Path : {self.train_path}")
-            logging.info(f"Test path : {self.test_path}")
+
             
             
             # creating instance for row_data_validation
             self.train_data = IngestedDataValidation(
                                 validate_path=self.train_path, schema_path=self.schema_path)
-            self.test_data = IngestedDataValidation(
-                                validate_path=self.test_path , schema_path=self.schema_path)
+
             
 
             
             # Data_validation_config --> file paths to save validated_data
             self.validated_train_path = self.data_validation_config.validated_train_path
-            self.validated_test_path =self.data_validation_config.validated_test_path
+
             
         
         except Exception as e:
@@ -48,14 +47,10 @@ class DataValidation:
 
     def isFolderPathAvailable(self) -> bool:
         try:
-
-            # check is the train and test file exists (Unvalidated file)
              
             isfolder_available = False
             train_path = self.train_path
-            test_path = self.test_path
             if os.path.exists(train_path):
-                if os.path.exists(test_path):
                     isfolder_available = True
             return isfolder_available
         except Exception as e:
@@ -85,20 +80,7 @@ class DataValidation:
                 
                 self.train_data.replace_null_values_with_nan()
                 
-                # Test File 
-                test_filename = os.path.basename(
-                    self.data_ingestion_artifact.test_file_path)
 
-                is_test_filename_validated = self.test_data.validate_filename(
-                    file_name=test_filename)
-
-                is_test_column_name_same = self.test_data.check_column_names()
-                validating_test_data_types=self.test_data.validate_data_types(filepath=self.test_path)
-
-                is_test_missing_values_whole_column = self.test_data.missing_values_whole_column()
-
-                self.test_data.replace_null_values_with_nan()
-                
                 
                 
 
@@ -109,13 +91,7 @@ class DataValidation:
                                 f"is train column name validated? {is_train_column_name_same} | "
                                 f"whole missing columns? {is_train_missing_values_whole_column}"
                                 f"Data type validation? {validating_train_data_types}"
-                            )
-                logging.info(
-                            f"Test_set status: "
-                            f"is Test filename validated? {is_test_filename_validated} | "
-                            f"is test column names validated? {is_test_column_name_same} | "
-                            f"whole missing columns? {is_test_missing_values_whole_column}"
-                            f"Data type validation? {validating_test_data_types}"
+
                                 )
                 if is_train_filename_validated  & is_train_column_name_same & is_train_missing_values_whole_column & validating_train_data_types  :
                     
@@ -130,21 +106,9 @@ class DataValidation:
                     logging.info(f"Exported validated train dataset to file: [{self.validated_train_path}]")
                                      
                                      
-                if is_test_filename_validated  & is_test_column_name_same & is_test_missing_values_whole_column & validating_test_data_types :
-                                          
-                    ## Exporting test.csv file
-                    os.makedirs(self.validated_test_path, exist_ok=True)
-                    logging.info(f"Exporting validated test dataset to file: [{self.validated_test_path}]")
-                    os.makedirs(self.validated_test_path, exist_ok=True)
-                    # Copy the CSV file to the validated train path
-                    self.validated_test_path=os.path.join(self.validated_test_path,'test.csv')
-                    shutil.copy(self.test_path, self.validated_test_path)
-                    
-                    # Log the export of the validated train dataset
-                    logging.info(f"Exported validated train dataset to file: [{self.validated_test_path}]")
+    
                     
                     data_validation_artifact={ 'data_validation_artifact':{ 
-                                  'validated_test_path'  : self.validated_test_path ,
                                   'validated_train_path' : self.validated_train_path}}
                     
 
@@ -154,7 +118,7 @@ class DataValidation:
                     
                                         
                     
-                    return validation_status,self.validated_train_path,self.validated_test_path
+                    return validation_status,self.validated_train_path
                 else:
                     validation_status = False
                     logging.info("Check your Training Data! Validation Failed")
@@ -171,12 +135,11 @@ class DataValidation:
         try:
             
             # Data Validation
-            is_validated, validated_train_path, validated_test_path = self.is_Validation_successfull()
+            is_validated, validated_train_path = self.is_Validation_successfull()
             
             
             data_validation_artifact = DataValidationArtifact(
-                validated_train_path=validated_train_path,
-                validated_test_path=validated_test_path
+                validated_train_path=validated_train_path
             )
             logging.info(f"Data validation artifact: {data_validation_artifact}")
             return data_validation_artifact

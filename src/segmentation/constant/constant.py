@@ -30,8 +30,6 @@ DATA_INGESTION_ARTIFACT_DIR = "artifact_dir"
 DATA_INGESTION_RAW_DATA_DIR_KEY = "raw_data_dir"
 DATA_INGESTION_INGESTED_DIR_NAME_KEY = "ingested_dir"
 DATA_INGESTION_TRAIN_DIR_KEY = "ingested_train_dir"
-DATA_INGESTION_TEST_DIR_KEY = "ingested_test_dir"
-SPLIT_SIZE="train_test_split"
 
 # Data Validation related variable
 DATA_VALIDATION_ARTIFACT_DIR="data_validation_dir"
@@ -40,7 +38,6 @@ DATA_VALIDATION_SCHEMA_FILE_NAME_KEY = "schema_file_name"
 DATA_VALIDATION_SCHEMA_DIR_KEY = "schema_dir"
 DATA_VALIDATION_VALID_DATASET ="validated_data"
 DATA_VALIDATION_TRAIN_FILE = "Train_data"
-DATA_VALIDATION_TEST_FILE ="Test_data"
 
 # transformation config file  
 ROOT_DIR=os.getcwd()
@@ -113,6 +110,9 @@ EXPERIMENT=config_data[MODEL_TRAINING_CONFIG_KEY][MODEL_TRAINING_MLFLOW][MLFLOW_
 RUN_NAME=config_data[MODEL_TRAINING_CONFIG_KEY][MODEL_TRAINING_MLFLOW][MLFLOW_RUN_NAME]
 METRIC=config_data[MODEL_TRAINING_CONFIG_KEY][MODEL_METRIC]
 
+
+
+TRANSFORMATION_YAML_FILE_PATH=os.path.join(os.getcwd(),'config','transformation.yaml')
 
 ## Artifact Entity 
 file_path=os.path.join(ROOT_DIR,'src','segmentation','entity','artifact_entity.yaml')

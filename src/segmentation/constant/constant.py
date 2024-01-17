@@ -72,9 +72,7 @@ MODEL_TRAINING_CONFIG_KEY='model_trainer_config'
 MODEL_TRAINER_ARTIFACT_DIR = "model_training"
 MODEL_TRAINER_OBJECT = "model_object"
 MODEL_REPORT_FILE="model_report"
-MODEL_TRAINING_MLFLOW='mlflow'
-MLFLOW_RUN_NAME='Run_name'
-MLFLOW_EXPERIMENT='Experiment'
+
 
 # Param Optimisation 
 PARAM_OPTIMIZE_CONFIG_KEY='param_optimize_config'
@@ -105,9 +103,6 @@ BUCKET_NAME='bucket_name'
 
 
 from segmentation.utils.main_utils import read_yaml_file
-config_data=read_yaml_file(CONFIG_FILE_PATH)
-EXPERIMENT=config_data[MODEL_TRAINING_CONFIG_KEY][MODEL_TRAINING_MLFLOW][MLFLOW_EXPERIMENT]
-RUN_NAME=config_data[MODEL_TRAINING_CONFIG_KEY][MODEL_TRAINING_MLFLOW][MLFLOW_RUN_NAME]
 
 
 # Model Training Parameters 

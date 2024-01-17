@@ -86,3 +86,28 @@ class ModelTrainerConfig:
 
         except Exception as e:
             raise ApplicationException(e,sys) from e
+        
+        
+class SavedModelConfig:
+    
+    def __init__(self):
+        self.saved_model_config_key=config_data[SAVED_MODEL_CONFIG_KEY]
+        ROOT_DIR=os.getcwd()
+        self.saved_model_dir=os.path.join(ROOT_DIR,self.saved_model_config_key[SAVED_MODEL_DIR])
+        self.saved_model_object_path=os.path.join(self.saved_model_dir,self.saved_model_config_key[SAVED_MODEL_OBJECT])
+        self.saved_model_report_path=os.path.join(self.saved_model_dir,self.saved_model_config_key[SAVED_MODEL_REPORT])
+        self.saved_model_png=os.path.join(self.saved_model_dir,MODEL_NAME+'.png')
+        
+class ModelEvalConfig:
+    
+    def __init__(self,training_pipeline_config:TrainingPipelineConfig):
+        
+        
+        model_eval_config_key=config_data[MODEL_EVAL_CONFIG_KEY]        
+        
+        self.model_eval_directory=os.path.join(training_pipeline_config.artifact_dir ,model_eval_config_key[MODEL_EVALUATION_DIRECTORY])
+        self.model_eval_object=os.path.join(self.model_eval_directory,model_eval_config_key[MODEL_EVALUATION_OBJECT])
+        self.model_eval_report=os.path.join(self.model_eval_directory,model_eval_config_key[MODEL_REPORT])
+        self.model_eval_png=os.path.join(self.model_eval_directory,MODEL_NAME+'.png')
+        
+        

@@ -65,6 +65,7 @@ class Model:
         axs[1].set_ylabel('')  # Remove y-axis label for better alignment
 
         # Save the figure
+        logging.info(f" Saving Predictions png at {file_path}")
         filename = os.path.join(file_path, model_name + '.png')
 
         # Adjust the overall plot layout and save the figure
@@ -204,7 +205,7 @@ class ModelTrainer:
              # Save report in artifact folder
             report_file_path = self.model_trainer_config.model_report_path
             save_model_path=self.model_trainer_config.trained_model_file_path
-            png_path=self.model_trainer_config.png_location
+            png_path=prediction_png_gmm_path
             
             
             # Saving Model Object and Model Report 
@@ -214,6 +215,8 @@ class ModelTrainer:
                                         report_file_path=report_file_path)
             
             logging.info("Model and Report Saved")
+            
+            logging.info(f"{png_path}")
 
             
             model_trainer_artifact = ModelTrainerArtifact(

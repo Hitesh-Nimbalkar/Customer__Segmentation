@@ -1,8 +1,8 @@
-Model_name: Gaussian Mixture
+Model_name: Gaussian_Mixture
 parameters:
   covariance_type: full
   init_params: k-means++
-  max_iter: 100
+  max_iter: 200
   no_of_clusters: 3
   tol: 1e-3
-silhoutte_score: '0.36242943973967207'
+silhoutte_score: '0.35744889924531265'

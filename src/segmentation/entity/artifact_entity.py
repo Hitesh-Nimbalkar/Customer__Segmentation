@@ -20,4 +20,12 @@ class ModelTrainerArtifact:
     model_selected:str
     report_path:str
     model_prediction_png:str
+
+@dataclass
+class ModelEvaluationArtifact:
+    message:str
+    model_file_path:str
+    model_report:str
+    prediction_png:str
+    
     

@@ -7,7 +7,7 @@ from segmentation.components.data_ingestion import DataIngestion
 from segmentation.components.data_validation import DataValidation
 from segmentation.components.data_transformation import DataTransformation
 from segmentation.components.model_training import ModelTrainer
-
+from segmentation.components.model_evaluation import ModelEvaluation
 
 
 class Pipeline():
@@ -58,6 +58,20 @@ class Pipeline():
             raise ApplicationException(e,sys) from e  
         
         
+    def model_evaluation(self,model_trainer_artifact:ModelTrainerArtifact):
+        try:
+            model_evaluation=ModelEvaluation(model_evaluation_config=ModelEvalConfig(self.training_pipeline_config),
+                                             model_trainer_artifact=model_trainer_artifact)
+            
+            logging.info(" Model Evaluating ....")
+            
+            return model_evaluation.initiate_model_evaluation()
+            
+            
+        except Exception as e:
+            raise ApplicationException(e,sys) from e       
+        
+        
     def run_pipeline(self):
             try:
                 #data ingestion
@@ -68,6 +82,8 @@ class Pipeline():
                 data_transformation_artifact = self.start_data_transformation(data_validation_artifact=data_validation_artifact)
                 # Model Trainer 
                 model_trainer_artifact = self.start_model_training(data_transformation_artifact=data_transformation_artifact)
+                # Model_evaluation 
+                model_evaluation_artifact = self.model_evaluation(model_trainer_artifact=model_trainer_artifact)
                                
 
                 

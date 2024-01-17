@@ -58,14 +58,14 @@ class ModelEvaluation:
             artifact_report_path=self.model_trainer_artifact.report_path
             artifact_png=self.model_trainer_artifact.model_prediction_png
             
-            logging.info(f"{artifact_png}")
+
 
             
             model_eval_model_path=self.model_evaluation_config.model_eval_object
             model_eval_model_report=self.model_evaluation_config.model_eval_report
             model_eval_png=self.model_evaluation_config.model_eval_png
             
-            logging.info(f"{model_eval_png}")
+           
             
             saved_model_directory=self.saved_model_directory
             os.makedirs(saved_model_directory,exist_ok=True)
@@ -88,10 +88,10 @@ class ModelEvaluation:
                 
                 logging.info(f" saved Report path{saved_directory_model_report} ")
                 saved_model_report=read_yaml_file(saved_directory_model_report)
-                saved_model_score=float(saved_model_report['R2_score'])
+                saved_model_score=float(saved_model_report[METRIC])
                 
                 artifact_report_data=read_yaml_file(artifact_report_path)
-                artifact_model_score=float(artifact_report_data['R2_score'])
+                artifact_model_score=float(artifact_report_data[METRIC])
             
                 
                 if saved_model_score > artifact_model_score:
@@ -99,7 +99,7 @@ class ModelEvaluation:
                     
                     shutil.copy(saved_model_path, model_eval_model_path)
                      # Copying Report 
-                    shutil.copy(saved_model_path, model_eval_model_report)
+                    shutil.copy(saved_directory_model_report, model_eval_model_report)
                     
                     shutil.copy(saved_model_png, model_eval_png)
                     
@@ -129,8 +129,8 @@ class ModelEvaluation:
             
             
             model_evaluation_artifact=ModelEvaluationArtifact(message="Model Evaluation complete",
-                                                            model_report=model_eval_model_path,
-                                                            model_file_path=model_eval_model_report,
+                                                            model_file_path=model_eval_model_path,
+                                                            model_report=model_eval_model_report,
                                                             prediction_png=model_eval_png)
 
             return model_evaluation_artifact

@@ -8,6 +8,7 @@ from segmentation.components.data_validation import DataValidation
 from segmentation.components.data_transformation import DataTransformation
 from segmentation.components.model_training import ModelTrainer
 from segmentation.components.model_evaluation import ModelEvaluation
+from segmentation.components.model_pusher import Model_pusher
 
 
 class Pipeline():
@@ -71,6 +72,19 @@ class Pipeline():
         except Exception as e:
             raise ApplicationException(e,sys) from e       
         
+    def model_pusher(self,model_evaluation_artifact:ModelEvaluationArtifact):    
+        try:
+            model_pusher=Model_pusher(model_evaluation_artifact=model_evaluation_artifact)
+            
+            logging.info(" Model Evaluating ....")
+            
+            return model_pusher.start_model_pusher()
+            
+        
+        except Exception as e:
+            raise ApplicationException(e,sys) from e          
+            
+        
         
     def run_pipeline(self):
             try:
@@ -84,6 +98,10 @@ class Pipeline():
                 model_trainer_artifact = self.start_model_training(data_transformation_artifact=data_transformation_artifact)
                 # Model_evaluation 
                 model_evaluation_artifact = self.model_evaluation(model_trainer_artifact=model_trainer_artifact)
+                # Model Pusher  
+                model_pusher_artifact= self.model_pusher(model_evaluation_artifact=model_evaluation_artifact)
+                
+                
                                
 
                 

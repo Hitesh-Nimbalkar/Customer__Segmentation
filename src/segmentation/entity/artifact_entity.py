@@ -29,3 +29,9 @@ class ModelEvaluationArtifact:
     prediction_png:str
     
     
+@dataclass
+class ModelPusherArtifact:
+    message:str
+
+    
+    

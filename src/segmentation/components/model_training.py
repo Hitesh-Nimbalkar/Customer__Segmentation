@@ -15,7 +15,6 @@ import matplotlib.pyplot as plt
 from sklearn.mixture import GaussianMixture
 from sklearn.metrics import silhouette_score
 import yaml
-import shutil
 from sklearn.decomposition import PCA
 
     
@@ -31,7 +30,6 @@ class Model:
         
     
     
-
     def cluster_plot(self, df, file_path, cluster_column, model_name, x_col='Total_Amount', y_col='Income'):
         # Set the style of the plot
         sns.set(style="whitegrid")
@@ -43,7 +41,7 @@ class Model:
         fig, axs = plt.subplots(1, 2, figsize=(16, 6))
 
         # Scatter plot
-        sns.scatterplot(data=df, x=x_col, y=y_col, hue=cluster_column, palette=cluster_palette, s=80, ax=axs[0])
+        sns.scatterplot(data=df, x=x_col, y=y_col, hue=df[cluster_column], palette=cluster_palette, s=80, ax=axs[0])
 
         # Set the axis labels and title for the scatter plot
         axs[0].set_xlabel(x_col, fontsize=12)
@@ -56,10 +54,10 @@ class Model:
         # Box plot
         sns.set(style="whitegrid")
 
-        # Create the box plot
+        # Create the box plot using stripplot
         pal = sns.color_palette("Set2", df[cluster_column].nunique())
-        pl = sns.swarmplot(x=df[cluster_column], y=df[y_col], color="gray", alpha=0.5, ax=axs[1])
-        pl = sns.boxenplot(x=df[cluster_column], y=df[y_col], palette=pal, ax=axs[1])
+        pl = sns.stripplot(x=df[cluster_column], y=df[y_col], color="gray", alpha=0.5, jitter=True, size=4, ax=axs[1])
+        pl = sns.boxenplot(x=df[cluster_column], y=df[y_col], palette=pal, ax=axs[1], legend=False)
         pl.set_title("Boxplot of customers clusters", pad=10, size=15)
 
         # Adjust the plot layout for the box plot
@@ -72,8 +70,6 @@ class Model:
         # Adjust the overall plot layout and save the figure
         fig.tight_layout()
         plt.savefig(filename)
-
-
 
         return filename
     

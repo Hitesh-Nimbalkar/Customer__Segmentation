@@ -5,4 +5,4 @@ parameters:
   max_iter: 100
   no_of_clusters: 3
   tol: 1e-3
-silhoutte_score: '0.37852296591637824'
+silhoutte_score: '0.36242943973967207'

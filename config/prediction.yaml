@@ -23,6 +23,11 @@ categorical_columns:
   - Alone
   - Absurd
   - YOLO
+  Total_Offsprings:
+  - 0
+  - 2
+  - 1
+  - 3
 numerical_columns:
 - Income
 - Recency
@@ -38,7 +43,6 @@ numerical_columns:
 - Store
 - WebVisitsMonth
 - Complain
-- Total_Offsprings
 - Age
 - Total_Amount
 - Frequency

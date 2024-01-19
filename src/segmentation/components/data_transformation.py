@@ -183,6 +183,8 @@ class Feature_Engineering(BaseEstimator, TransformerMixin):
         logging.info(" ------ Modifying consumer Data ------")
         # Total Offspring
         logging.info(" Creating Total Offspring column")
+        
+
         X['Total_Offsprings'] = X['Kidhome'] + X['Teenhome']
 
         # Living With

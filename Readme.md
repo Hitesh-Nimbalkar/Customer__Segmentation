@@ -67,10 +67,10 @@ Categorizing customers based on income levels provides invaluable insights into 
 
 
 ## Cluster 
-![alt text](report\Clustter.png)
+![alt text](report/Clustter.png)
 ## Batch Prediction 
 
-![alt text](report\Batch.png)
+![alt text](report/Batch.png)
 
 
 
@@ -100,7 +100,7 @@ In the context of clustering, GMM assumes that the data points are generated fro
 **Number of Clusters** - 3 
 **Elbow Method**
 
-![alt text](report\Elbow_method.png)
+![alt text](report/Elbow_method.png)
 
 **Metric** 
 **Silhouette Score**:
@@ -111,17 +111,17 @@ score obtained - 0.40 - 0.55
 ## Training Pipeline 
 
 
-![alt text](report\Training_Pipeline.png)
+![alt text](report/Training_Pipeline.png)
 
 #### Data Ingestion 
-![alt text](report\Data_Ingestion.png)
+![alt text](report/Data_Ingestion.png)
 
 Data Ingestion class represents a data ingestion process that involves retrieving data from a data source, saving it in a raw data directory, and splitting it into training and test datasets. 
 The class code flows in following way:
 Data Ingestion class takes a necessary elements and that provides the configuration settings for the data ingestion process.
 
 #### Data Validation 
-![alt text](report\Data_Validation.png)
+![alt text](report/Data_Validation.png)
 This method is designed to validate the training and test data stored in the artifact folder, resulting from the earlier data ingestion process. Its primary responsibility is to perform validation checks on both the training and test datasets.
 
 The validation process consists of the following steps:
@@ -145,7 +145,7 @@ Each of these validation processes returns a boolean value as the result. If the
 
 
 #### Data Transformation
-![alt text](report\Data_Transformation.png)
+![alt text](report/Data_Transformation.png)
 
 Once the validated data is obtained from the artifact folder, it undergoes necessary transformations before being used for model training. These transformations ensure that the data is in a suitable format and structure for the training process.
 
@@ -165,7 +165,7 @@ Overall, the data transformation stage ensures that the validated data undergoes
 
 
 ### Model Trainer 
-![alt text](report\Model_trainer.png)
+![alt text](report/Model_trainer.png)
 
 The best model, along with its corresponding best parameters, is saved for future use. This ensures that the optimal model can be easily retrieved and applied to new data.
 
@@ -176,6 +176,6 @@ Chosen model along with its associated model object and model report.
 This approach ensures that we retain the most optimal model for future use.
 
 #### Model Pusher 
-![alt text](report\Model_Pusher.png)
+![alt text](report/Model_Pusher.png)
 
 Upon selecting the models and gathering the relevant information from the evaluation module, we proceed to push the chosen model and its corresponding report to the saved model directory. This ensures that the selected model is readily available for future prediction processes.
